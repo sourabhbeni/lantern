@@ -1,0 +1,70 @@
+{
+  "tool": "lantern",
+  "target": "example.com",
+  "scanned_at": "2026-09-24T01:03:43.353807+00:00",
+  "hosts": {
+    "example.com": {
+      "ips": [
+        "93.184.216.34"
+      ],
+      "open_ports": [
+        80,
+        443
+      ]
+    },
+    "admin.example.com": {
+      "ips": [
+        "93.184.216.35"
+      ],
+      "open_ports": [
+        22,
+        80,
+        443,
+        3306
+      ]
+    }
+  },
+  "summary": {
+    "high": 0,
+    "medium": 3,
+    "low": 1,
+    "info": 1
+  },
+  "findings": [
+    {
+      "target": "admin.example.com:3306",
+      "severity": "medium",
+      "check": "exposed-service",
+      "title": "Sensitive service exposed: MySQL",
+      "detail": "Port 3306 is reachable from the internet. Restrict with firewall/security groups."
+    },
+    {
+      "target": "example.com",
+      "severity": "medium",
+      "check": "tls",
+      "title": "TLS certificate expires in 9 days",
+      "detail": "Issuer: Example CA. Rotate before expiry to avoid outage."
+    },
+    {
+      "target": "https://example.com",
+      "severity": "medium",
+      "check": "security-headers",
+      "title": "HSTS not set \u2014 first-visit traffic can be downgraded",
+      "detail": "Response did not include `strict-transport-security`."
+    },
+    {
+      "target": "https://example.com",
+      "severity": "low",
+      "check": "security-headers",
+      "title": "No Content-Security-Policy \u2014 wider XSS impact if injection occurs",
+      "detail": "Response did not include `content-security-policy`."
+    },
+    {
+      "target": "https://admin.example.com",
+      "severity": "info",
+      "check": "banner",
+      "title": "Server banner discloses `nginx/1.18.0`",
+      "detail": "Version banners help attackers fingerprint the stack; consider minimizing."
+    }
+  ]
+}
