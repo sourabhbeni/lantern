@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lantern"
+version = "0.1.0"
+description = "Lightweight attack-surface mapper: subdomains, open ports, security headers, TLS posture."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Saurabh Beniwal" }]
+keywords = ["security", "recon", "osint", "pentest"]
+
+[project.scripts]
+lantern = "lantern.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["lantern*"]
